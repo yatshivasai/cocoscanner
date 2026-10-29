@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Local runtime / investigation data (do not publish captures or local records)
+data/*.json
+data/*.pcap
+data/*.pcapng
+*.pcap
+*.pcapng
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
