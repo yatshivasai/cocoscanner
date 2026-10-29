@@ -1,7 +1,14 @@
 <div align="center">
-  <img src="assets/Gemini_Generated_Image_kl7g6dkl7g6dkl7g.png" alt="NETSENTINEL Logo" width="420">
-</div>
 
+![NETSENTINEL Logo](netsentinel-logo.png)
+
+# NETSENTINEL
+
+### Network Monitoring & Security Investigation
+
+**Monitor · Analyze · Investigate · Document**
+
+</div>
 # NETSENTINEL
 
 ### Network Monitoring & Security Investigation
