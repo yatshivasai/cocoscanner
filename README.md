@@ -1,8 +1,11 @@
-# NETSENTINEL
+<div align="center">
+  <img src="./netsentinel-logo.png" alt="NETSENTINEL Logo" width="90">
 
-![NETSENTINEL Logo](netsentinel-logo-compact.png#gh-light-mode-only){width="30"}
-# NETSENTINEL
+  <h1>NETSENTINEL</h1>
 
+  <p><strong>Network Monitoring &amp; Security Investigation</strong></p>
+  <p>Monitor · Analyze · Investigate · Document</p>
+</div>
 
 ### Network Monitoring & Security Investigation
 
