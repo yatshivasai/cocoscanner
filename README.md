@@ -1,6 +1,6 @@
 # NETSENTINEL
 
-![NETSENTINEL Logo](netsentinel-logo-compact.png#gh-light-mode-only){width="70"}
+![NETSENTINEL Logo](netsentinel-logo-compact.png#gh-light-mode-only){width="30"}
 # NETSENTINEL
 
 ### Network Monitoring & Security Investigation
