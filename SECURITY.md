@@ -1,6 +1,6 @@
 # Security Policy
 
-NETSENTINEL is an educational and investigative network tool. It is not a
+COCOSCANNER is an educational and investigative network tool. It is not a
 replacement for a production SIEM or a guarantee that a network is safe.
 
 ## Reporting a vulnerability

@@ -1,4 +1,4 @@
-NETSENTINEL — PROFESSIONAL OPERATOR GUIDE
+COCOSCANNER — PROFESSIONAL OPERATOR GUIDE
 Version: v2.02 Phase 5 | Ubuntu desktop edition
 
 CONTENTS
@@ -18,7 +18,7 @@ CONTENTS
 14. Interpretation limits and analyst checklist
 
 1. PURPOSE AND SAFE-USE BOUNDARIES
-NETSENTINEL is a local desktop tool for observing traffic visible to your selected network interface, reviewing network metadata, inspecting authorized packet captures, and documenting findings. It is not a full replacement for Wireshark, Zeek, Suricata, or an enterprise SIEM. Use it only on systems, networks, and capture files you own or have explicit permission to inspect.
+COCOSCANNER is a local desktop tool for observing traffic visible to your selected network interface, reviewing network metadata, inspecting authorized packet captures, and documenting findings. It is not a full replacement for Wireshark, Zeek, Suricata, or an enterprise SIEM. Use it only on systems, networks, and capture files you own or have explicit permission to inspect.
 
 A capture sees only packets available at the selected interface and capture point. A normal switched network interface generally does not see every other device's unicast traffic. HTTPS/TLS application content remains encrypted; metadata such as endpoints, ports, timing, sizes, and some DNS may still be visible depending on the network and capture point.
 
@@ -51,7 +51,7 @@ Common interface names include wlan0, wlp2s0, eth0, and enp3s0. Use the interfac
 Keep captures short and scoped to the investigation. Packet captures can contain sensitive information, including internal addresses and unencrypted application data. Store and share them carefully.
 
 4. PACKET SEARCH SYNTAX AND EXAMPLES
-The Packet Inspector has a compact search field. It supports a small set of NETSENTINEL-specific expressions, not the full Wireshark display-filter language and not tcpdump/BPF syntax. Matching is case-insensitive for protocol names and text. Multiple supported expressions are combined with AND when separated by spaces or the word 'and'. If the input is not recognized as one of the supported expressions, the app falls back to a simple text search across packet metadata.
+The Packet Inspector has a compact search field. It supports a small set of COCOSCANNER-specific expressions, not the full Wireshark display-filter language and not tcpdump/BPF syntax. Matching is case-insensitive for protocol names and text. Multiple supported expressions are combined with AND when separated by spaces or the word 'and'. If the input is not recognized as one of the supported expressions, the app falls back to a simple text search across packet metadata.
 
 Supported expressions:
 
@@ -170,7 +170,7 @@ Capture a short authorized sample with tcpdump (if installed):
 
     sudo tcpdump -i wlan0 -c 200 -w sample.pcap
 
-Replace wlan0 with the correct interface. Stop automatically after 200 packets. To stop sooner, press Ctrl+C. Treat the output as sensitive evidence. NETSENTINEL can then load sample.pcap in the PCAP Lab.
+Replace wlan0 with the correct interface. Stop automatically after 200 packets. To stop sooner, press Ctrl+C. Treat the output as sensitive evidence. COCOSCANNER can then load sample.pcap in the PCAP Lab.
 
 Check whether a capture file exists and inspect its hash:
 
@@ -224,7 +224,7 @@ The app provides contextual mappings, not a certification that an adversary used
 
 ## Cases & SIEM Logs
 
-Use **Cases & SIEM Logs** to create a case, choose severity/status, and record initial notes. Select a case before attaching evidence or exporting it. To attach the currently loaded PCAP, load the file in PCAP Lab, select a case, and click **Attach loaded PCAP**. NETSENTINEL records the path, packet count, timestamp, and SHA-256 hash. Keep the original capture in a secure location; the app references it rather than copying it into the case bundle.
+Use **Cases & SIEM Logs** to create a case, choose severity/status, and record initial notes. Select a case before attaching evidence or exporting it. To attach the currently loaded PCAP, load the file in PCAP Lab, select a case, and click **Attach loaded PCAP**. COCOSCANNER records the path, packet count, timestamp, and SHA-256 hash. Keep the original capture in a secure location; the app references it rather than copying it into the case bundle.
 
 Use **Import Suricata / Zeek logs…** to ingest a local Suricata EVE JSON file (one JSON object per line) or a Zeek TSV log with a `#fields` header. Imports are capped at 20,000 event rows for responsiveness. This is offline log ingestion, not a live connection to Suricata or Zeek. Imported events are held in the current application session and included in case exports.
 

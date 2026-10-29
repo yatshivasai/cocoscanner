@@ -1,10 +1,10 @@
-# Publish NETSENTINEL on GitHub
+# Publish CocoScanner on GitHub
 
 ## 1. Create the repository
 
 1. Sign in to GitHub.
 2. Choose **New repository**.
-3. Name it `netsentinel` (or your preferred name).
+3. Name it `CocoScanner` (or your preferred name).
 4. Set visibility to **Public** if you want everyone to view and download it.
 5. Do not initialize another README/license if you are uploading these files as-is.
 
@@ -16,9 +16,9 @@ Extract this bundle, open the folder in a terminal, then run:
 git init
 git add .
 git status
-git commit -m "Initial NETSENTINEL release"
+git commit -m "Initial CocoScanner release"
 git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/netsentinel.git
+git remote add origin https://github.com/YOUR-USERNAME/CocoScanner.git
 git push -u origin main
 ```
 
@@ -44,8 +44,8 @@ Describe supported Ubuntu versions, setup commands, known limitations, and test 
 After publication, users can run:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/netsentinel.git
-cd netsentinel
+git clone https://github.com/YOUR-USERNAME/CocoScanner.git
+cd CocoScanner
 chmod +x setup.sh run.sh
 ./setup.sh
 ./run.sh

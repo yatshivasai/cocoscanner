@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""NETSENTINEL v2.02 Phase 6 — local threat-intelligence correlation and ATT&CK context."""
+"""CocoScanner v2.02 Phase 6 — local threat-intelligence correlation and ATT&CK context."""
 import ipaddress, json, queue, re, shutil, socket, subprocess, threading, time, hashlib, csv, os
 from datetime import datetime, timezone
 from pathlib import Path
@@ -84,7 +84,7 @@ def decode_packet(pkt):
 
 class App:
  def __init__(self,root):
-    self.root=root; root.title("NETSENTINEL — Desktop Network Monitor"); root.geometry("1450x900"); root.minsize(980,640); root.configure(bg=BG)
+    self.root=root; root.title("CocoScanner — Desktop Network Monitor"); root.geometry("1450x900"); root.minsize(980,640); root.configure(bg=BG)
     self.q=queue.Queue(maxsize=10000); self.stop=threading.Event(); self.capturing=False
     self.capture_error=None
     self.capture_count=0
@@ -132,7 +132,7 @@ class App:
      splash.geometry(f"{width}x{height}+{x}+{y}")
      tk.Frame(splash,bg=ACCENT,height=7).pack(fill="x")
      body=tk.Frame(splash,bg="#f3f6fa",padx=30,pady=28); body.pack(fill="both",expand=True)
-     tk.Label(body,text="NETSENTINEL",bg="#f3f6fa",fg=ACCENT,font=("DejaVu Sans",27,"bold")).pack(pady=(10,4))
+     tk.Label(body,text="CocoScanner",bg="#f3f6fa",fg=ACCENT,font=("DejaVu Sans",27,"bold")).pack(pady=(10,4))
      tk.Label(body,text="NETWORK VISIBILITY  •  THREAT INVESTIGATION",bg="#f3f6fa",fg="#526174",font=("DejaVu Sans",9,"bold")).pack()
      tk.Frame(body,bg="#dbe3ed",height=1).pack(fill="x",pady=18)
      tk.Label(body,text="Preparing your analyst workspace…",bg="#f3f6fa",fg="#526174",font=("DejaVu Sans",10)).pack()
@@ -196,12 +196,12 @@ class App:
     help_menu.add_command(label="User Guide / How to Operate",command=self.show_help)
     help_menu.add_command(label="Quick Start",command=self.show_quick_start)
     help_menu.add_separator(); help_menu.add_command(label="Diagnostics",command=self.show_diagnostics)
-    help_menu.add_command(label="About NETSENTINEL",command=self.show_about)
+    help_menu.add_command(label="About CocoScanner",command=self.show_about)
     menubar.add_cascade(label="Help",menu=help_menu)
     self.root.configure(menu=menubar)
     header=ttk.Frame(self.root,padding=(10,6,10,5)); header.pack(fill="x")
     brand=ttk.Frame(header); brand.pack(side="left",fill="x",expand=True)
-    ttk.Label(brand,text="NETSENTINEL",style="Title.TLabel").pack(anchor="w")
+    ttk.Label(brand,text="CocoScanner",style="Title.TLabel").pack(anchor="w")
     ttk.Label(brand,text="NETWORK VISIBILITY  /  THREAT INTELLIGENCE  /  PCAP INVESTIGATION",style="Subtitle.TLabel").pack(anchor="w",pady=(1,0))
     self.status=tk.StringVar(value="●  READY"); self.status_label=ttk.Label(header,textvariable=self.status,font=("DejaVu Sans",10,"bold")); self.status_label.pack(side="right",pady=(10,0))
     ttk.Frame(self.root,style="AccentBar.TFrame",height=3).pack(fill="x",padx=10,pady=(0,5))
@@ -314,10 +314,10 @@ class App:
     path=filedialog.asksaveasfilename(title="Export case bundle manifest",defaultextension=".json",filetypes=[("Case JSON","*.json"),("HTML case report","*.html")],initialfile=f"{c['id']}-case.json")
     if not path:return
     try:
-     target=Path(path);bundle={"application":"NETSENTINEL","exported_at":stamp(),"case":c,"security_events":self.imported_security_events[-500:],"integrity_note":"SHA-256 hashes verify byte equality against the hash recorded at attachment time; they do not alone prove provenance or chain of custody."}
+     target=Path(path);bundle={"application":"CocoScanner","exported_at":stamp(),"case":c,"security_events":self.imported_security_events[-500:],"integrity_note":"SHA-256 hashes verify byte equality against the hash recorded at attachment time; they do not alone prove provenance or chain of custody."}
      if target.suffix.lower()==".html":
       import html
-      target.write_text("<!doctype html><meta charset='utf-8'><title>NETSENTINEL Case</title><body style='font:15px system-ui;max-width:1000px;margin:30px auto'><h1>NETSENTINEL Case "+html.escape(c["id"])+"</h1><pre>"+html.escape(json.dumps(bundle,indent=2,ensure_ascii=False))+"</pre></body>",encoding="utf-8")
+      target.write_text("<!doctype html><meta charset='utf-8'><title>CocoScanner Case</title><body style='font:15px system-ui;max-width:1000px;margin:30px auto'><h1>CocoScanner Case "+html.escape(c["id"])+"</h1><pre>"+html.escape(json.dumps(bundle,indent=2,ensure_ascii=False))+"</pre></body>",encoding="utf-8")
      else:target.write_text(json.dumps(bundle,indent=2,ensure_ascii=False),encoding="utf-8")
      messagebox.showinfo("Case exported",f"Saved case report to:\n{target}")
     except OSError as e:messagebox.showerror("Export failed",str(e))
@@ -358,12 +358,12 @@ class App:
     except (OSError,ValueError) as e:messagebox.showerror("Log import failed",str(e))
 
  def show_diagnostics(self):
-    details={"application":"NETSENTINEL v2.02 Phase 6+","python":__import__("sys").version.split()[0],"platform":__import__("platform").platform(),"interface":self.iface.get().strip(),"capture_running":self.capturing,"packets_in_memory":len(self.packets),"current_session_packets":len(self.session_raw_packets),"capture_queue_depth":self.q.qsize(),"ioc_count":len(self.iocs),"case_count":len(self.cases),"imported_security_events":len(self.imported_security_events),"data_directory":str(DATA)}
+    details={"application":"CocoScanner v2.02 Phase 6+","python":__import__("sys").version.split()[0],"platform":__import__("platform").platform(),"interface":self.iface.get().strip(),"capture_running":self.capturing,"packets_in_memory":len(self.packets),"current_session_packets":len(self.session_raw_packets),"capture_queue_depth":self.q.qsize(),"ioc_count":len(self.iocs),"case_count":len(self.cases),"imported_security_events":len(self.imported_security_events),"data_directory":str(DATA)}
     try:
      import scapy;details["scapy"]="installed"
     except ImportError:details["scapy"]="not installed"
     details["nmap"]="available" if shutil.which("nmap") else "not installed"
-    messagebox.showinfo("NETSENTINEL Diagnostics",json.dumps(details,indent=2))
+    messagebox.showinfo("CocoScanner Diagnostics",json.dumps(details,indent=2))
 
  def build_packet_tab(self):
     top=ttk.Frame(self.packet_tab,style="Panel.TFrame"); top.pack(fill="x",pady=(0,9))
@@ -423,10 +423,10 @@ class App:
     try:
      content=path.read_text(encoding="utf-8")
     except OSError:
-     content="NETSENTINEL User Guide is missing. Re-extract the complete application ZIP."
-    win=tk.Toplevel(self.root); win.title("NETSENTINEL — User Guide"); win.geometry("920x720"); win.minsize(680,480); win.configure(bg=BG)
+     content="CocoScanner User Guide is missing. Re-extract the complete application ZIP."
+    win=tk.Toplevel(self.root); win.title("CocoScanner — User Guide"); win.geometry("920x720"); win.minsize(680,480); win.configure(bg=BG)
     top=ttk.Frame(win,padding=(16,12)); top.pack(fill="x")
-    ttk.Label(top,text="NETSENTINEL OPERATOR GUIDE",style="Title.TLabel").pack(side="left")
+    ttk.Label(top,text="CocoScanner OPERATOR GUIDE",style="Title.TLabel").pack(side="left")
     ttk.Button(top,text="Close",command=win.destroy).pack(side="right")
     body=ttk.Frame(win,padding=(16,0,16,16)); body.pack(fill="both",expand=True)
     box=tk.Text(body,bg="#ffffff",fg=TEXT,insertbackground=TEXT,selectbackground="#24515a",font=("DejaVu Sans Mono",10),wrap="word",relief="flat",padx=14,pady=12)
@@ -435,10 +435,10 @@ class App:
     box.insert("1.0",content); box.configure(state="disabled")
 
  def show_quick_start(self):
-    messagebox.showinfo("NETSENTINEL — Quick Start", "LIVE MONITORING\n1. Select the network interface shown at the top (commonly wlan0 or enp…).\n2. Click Start capture. Use Stop when finished.\n3. Select a packet to inspect decoded fields and payload preview.\n\nOFFLINE PCAP\n1. Open PCAP Lab & Reports.\n2. Load a .pcap, .pcapng, or .cap file.\n3. Analyze capture, review findings, and export an HTML or JSON report.\n\nDEVICE DISCOVERY\nEnter an authorized private IPv4 subnet (for example 192.168.1.0/24) and click Discover devices. Only scan networks you own or have permission to assess.\n\nFor detailed search syntax, alerts, exports, troubleshooting, and limitations, open Help → User Guide.")
+    messagebox.showinfo("CocoScanner — Quick Start", "LIVE MONITORING\n1. Select the network interface shown at the top (commonly wlan0 or enp…).\n2. Click Start capture. Use Stop when finished.\n3. Select a packet to inspect decoded fields and payload preview.\n\nOFFLINE PCAP\n1. Open PCAP Lab & Reports.\n2. Load a .pcap, .pcapng, or .cap file.\n3. Analyze capture, review findings, and export an HTML or JSON report.\n\nDEVICE DISCOVERY\nEnter an authorized private IPv4 subnet (for example 192.168.1.0/24) and click Discover devices. Only scan networks you own or have permission to assess.\n\nFor detailed search syntax, alerts, exports, troubleshooting, and limitations, open Help → User Guide.")
 
  def show_about(self):
-    messagebox.showinfo("About NETSENTINEL", "NETSENTINEL — Desktop Network Monitor\nVersion: v2.02 Phase 6\nBuilt with Python, Tkinter, Scapy, Nmap, and JSON.\nLocal desktop application; no web server or SQLite database.\n\nUse only on networks and captures you own or are authorized to inspect.")
+    messagebox.showinfo("About CocoScanner", "CocoScanner — Desktop Network Monitor\nVersion: v2.02 Phase 6\nBuilt with Python, Tkinter, Scapy, Nmap, and JSON.\nLocal desktop application; no web server or SQLite database.\n\nUse only on networks and captures you own or are authorized to inspect.")
 
  def set_status(self,text,error=False):
     self.status.set(("●  " + text) if not text.startswith("●") else text);self.status_label.configure(foreground=RED if error else GREEN)
@@ -584,7 +584,7 @@ class App:
     except Exception as e:messagebox.showerror("Import failed",str(e))
 
  def export_iocs(self):
-    path=filedialog.asksaveasfilename(title="Export local indicator feed",defaultextension=".json",filetypes=[("JSON feed","*.json"),("CSV feed","*.csv")],initialfile="netsentinel-indicators.json")
+    path=filedialog.asksaveasfilename(title="Export local indicator feed",defaultextension=".json",filetypes=[("JSON feed","*.json"),("CSV feed","*.csv")],initialfile="CocoScanner-indicators.json")
     if not path:return
     try:
      if Path(path).suffix.lower()==".csv":
@@ -637,7 +637,7 @@ class App:
      attack.append({"technique":"Needs analyst mapping","name":"IOC match requires context","reason":"An imported IOC matched packet metadata; the match alone does not establish an ATT&CK technique.","tactic":"Unmapped"})
     report={"generated_at":stamp(),"capture":self.pcap_lab_path,"indicator_count":len(self.iocs),"match_count":len(matches),"matches":matches,"mitre_attack_context":attack,"note":"IOC matches indicate overlap with the imported local feed only; feed quality, freshness, shared hosting, NAT, and benign reuse must be validated. ATT&CK mappings are hypotheses, not confirmed techniques."}
     self.pcap_lab_report["threat_intel_correlation"]=report
-    lines=["NETSENTINEL — THREAT INTELLIGENCE CORRELATION", "="*58, f"Capture: {self.pcap_lab_path}",f"Indicators loaded: {len(self.iocs)}",f"Packet-level matches: {len(matches)}","","IOC MATCHES"]
+    lines=["CocoScanner — THREAT INTELLIGENCE CORRELATION", "="*58, f"Capture: {self.pcap_lab_path}",f"Indicators loaded: {len(self.iocs)}",f"Packet-level matches: {len(matches)}","","IOC MATCHES"]
     if matches:
      for m in matches[:500]:lines.append(f"[{m['confidence'].upper()}] packet #{m['packet_index']+1} {m['timestamp']} | {m['indicator_type']}={m['indicator']} | field={m['field']} | source={m['source']} | {m['notes']}")
      if len(matches)>500:lines.append(f"… {len(matches)-500} additional matches omitted from this view (retained in report data).")
@@ -742,7 +742,7 @@ class App:
     if prior_correlation:
      report["threat_intel_correlation"]=prior_correlation
     self.pcap_lab_report=report;self._populate_pcap_rows(row_findings)
-    lines=["NETSENTINEL — PCAP INVESTIGATION REPORT","="*62,f"Source: {self.pcap_lab_path}",f"Generated: {report['generated_at']}",f"Packets analyzed: {len(recs):,}",f"Capture time range: {start} → {end}","","PROTOCOL DISTRIBUTION"]
+    lines=["CocoScanner — PCAP INVESTIGATION REPORT","="*62,f"Source: {self.pcap_lab_path}",f"Generated: {report['generated_at']}",f"Packets analyzed: {len(recs):,}",f"Capture time range: {start} → {end}","","PROTOCOL DISTRIBUTION"]
     for proto,count in sorted(counts.items(),key=lambda x:-x[1]):lines.append(f"  {proto:<12} {count:>8,} ({100*count/max(1,len(recs)):.1f}%)")
     lines += ["","TOP TALKERS (source + destination appearances)"]
     for t in report["top_talkers"]:lines.append(f"  {t['ip']:<40} packets={t['packets']} bytes={t['bytes']}")
@@ -769,7 +769,7 @@ class App:
  def export_pcap_report(self):
     if not self.pcap_lab_report or not self.pcap_lab_report.get("findings"):
      messagebox.showinfo("Analyze first","Load and analyze a capture before exporting a report.");return
-    path=filedialog.asksaveasfilename(title="Export investigation report",defaultextension=".html",filetypes=[("HTML report","*.html"),("JSON report","*.json")],initialfile="netsentinel-investigation-report.html")
+    path=filedialog.asksaveasfilename(title="Export investigation report",defaultextension=".html",filetypes=[("HTML report","*.html"),("JSON report","*.json")],initialfile="CocoScanner-investigation-report.html")
     if not path:return
     try:
      import html
@@ -786,7 +786,7 @@ class App:
       corr_rows="".join(f"<tr><td>{html.escape(str(m.get('indicator','')))}</td><td>{html.escape(str(m.get('indicator_type','')))}</td><td>{int(m.get('packet_index',0))+1}</td><td>{html.escape(str(m.get('source','')))}</td><td>{html.escape(str(m.get('confidence','')))}</td></tr>" for m in corr.get("matches",[])[:1000])
       attack_rows="".join(f"<li><b>{html.escape(str(a.get('technique','')))} — {html.escape(str(a.get('name','')))}</b> ({html.escape(str(a.get('tactic','')))}): {html.escape(str(a.get('reason','')))}</li>" for a in corr.get("mitre_attack_context",[]))
       corr_section=(f"<section><h2>Threat intelligence correlation</h2><p>Local indicators: {corr.get('indicator_count',0)}; matches: {corr.get('match_count',0)}</p><table><tr><th>Indicator</th><th>Type</th><th>Packet row</th><th>Source</th><th>Confidence</th></tr>{corr_rows}</table><h3>ATT&CK context (hypotheses)</h3><ul>{attack_rows}</ul><p><small>{html.escape(str(corr.get('note','No IOC correlation performed.')))}</small></p></section>" if corr else "")
-      doc=f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>NETSENTINEL Investigation Report</title><style>body{{font:16px system-ui;max-width:1050px;margin:36px auto;padding:0 18px;background:#0b1220;color:#243244}}h1,h2{{color:#0f766e}}section,article{{background:#121d2d;padding:16px;border-radius:10px;margin:12px 0}}table{{border-collapse:collapse;width:100%}}td,th{{padding:8px;border-bottom:1px solid #334155;text-align:left}}small{{color:#64748b}}</style><h1>NETSENTINEL — PCAP Investigation Report</h1><p>Generated: {html.escape(r.get('generated_at',''))}</p><section><h2>Capture</h2><p>Source: {html.escape(r.get('source_file',''))}</p><p>Packets analyzed: {r.get('packets_analyzed',0):,} / {r.get('packets_read',0):,}</p><p>UTC range: {html.escape(r.get('capture_start_utc',''))} → {html.escape(r.get('capture_end_utc',''))}</p></section><section><h2>Protocol distribution</h2><table><tr><th>Protocol</th><th>Packets</th></tr>{protocols}</table></section><section><h2>Top talkers</h2><table><tr><th>IP</th><th>Appearances</th><th>Observed bytes</th></tr>{talkers}</table></section><section><h2>Top DNS names</h2><table><tr><th>Name</th><th>Observations</th></tr>{dns}</table></section><section><h2>Findings</h2>{finds}</section>{corr_section}<section><h2>Limitations</h2><ul>{limitations}</ul><p><small>Heuristics support investigation; they do not establish malicious intent. HTTPS application payloads remain encrypted.</small></p></section></html>'''
+      doc=f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>CocoScanner Investigation Report</title><style>body{{font:16px system-ui;max-width:1050px;margin:36px auto;padding:0 18px;background:#0b1220;color:#243244}}h1,h2{{color:#0f766e}}section,article{{background:#121d2d;padding:16px;border-radius:10px;margin:12px 0}}table{{border-collapse:collapse;width:100%}}td,th{{padding:8px;border-bottom:1px solid #334155;text-align:left}}small{{color:#64748b}}</style><h1>CocoScanner — PCAP Investigation Report</h1><p>Generated: {html.escape(r.get('generated_at',''))}</p><section><h2>Capture</h2><p>Source: {html.escape(r.get('source_file',''))}</p><p>Packets analyzed: {r.get('packets_analyzed',0):,} / {r.get('packets_read',0):,}</p><p>UTC range: {html.escape(r.get('capture_start_utc',''))} → {html.escape(r.get('capture_end_utc',''))}</p></section><section><h2>Protocol distribution</h2><table><tr><th>Protocol</th><th>Packets</th></tr>{protocols}</table></section><section><h2>Top talkers</h2><table><tr><th>IP</th><th>Appearances</th><th>Observed bytes</th></tr>{talkers}</table></section><section><h2>Top DNS names</h2><table><tr><th>Name</th><th>Observations</th></tr>{dns}</table></section><section><h2>Findings</h2>{finds}</section>{corr_section}<section><h2>Limitations</h2><ul>{limitations}</ul><p><small>Heuristics support investigation; they do not establish malicious intent. HTTPS application payloads remain encrypted.</small></p></section></html>'''
       target.write_text(doc,encoding="utf-8")
      messagebox.showinfo("Report exported",f"Saved investigation report to:\n{target}")
     except Exception as exc:messagebox.showerror("Report export failed",str(exc))
@@ -953,7 +953,7 @@ class App:
     for e in reversed(self.dns_events):
      self.dns_tree.insert("","end",values=(e["timestamp"],e["src"],e["dst"],e["type"],e["name"],e["summary"]))
  def export_dns(self):
-    path=filedialog.asksaveasfilename(title="Export DNS history",defaultextension=".json",filetypes=[("JSON files","*.json")],initialfile="netsentinel-dns-history.json")
+    path=filedialog.asksaveasfilename(title="Export DNS history",defaultextension=".json",filetypes=[("JSON files","*.json")],initialfile="CocoScanner-dns-history.json")
     if not path:return
     try:
      Path(path).write_text(json.dumps(self.dns_events,indent=2),encoding="utf-8")
@@ -1087,7 +1087,7 @@ class App:
     self.alert_detail.delete("1.0","end")
     self.alert_detail.insert("1.0",f'Rule: {event.get("rule")}\\nSeverity: {event.get("severity")}\\nStatus: {event.get("status","new")}\\nTimestamp: {event.get("timestamp")}\\nSource: {event.get("src","—")}\\n\\nEvidence: {event.get("detail","")}\\n\\nAnalyst notes:\\n{event.get("notes","(none)")}')
  def export_alerts(self):
-    path=filedialog.asksaveasfilename(title="Export alert history",defaultextension=".json",filetypes=[("JSON files","*.json")],initialfile="netsentinel-alerts.json")
+    path=filedialog.asksaveasfilename(title="Export alert history",defaultextension=".json",filetypes=[("JSON files","*.json")],initialfile="CocoScanner-alerts.json")
     if not path:return
     try:
      Path(path).write_text(json.dumps(self.alert_events,indent=2),encoding="utf-8")
@@ -1287,7 +1287,7 @@ class App:
     if not self.session_raw_packets:
      messagebox.showinfo("No packets","Capture packets in this session before exporting a PCAP.")
      return
-    path=filedialog.asksaveasfilename(title="Export captured packets",defaultextension=".pcap",filetypes=[("PCAP files","*.pcap")],initialfile="netsentinel-capture.pcap")
+    path=filedialog.asksaveasfilename(title="Export captured packets",defaultextension=".pcap",filetypes=[("PCAP files","*.pcap")],initialfile="CocoScanner-capture.pcap")
     if not path:return
     try:
      from scapy.utils import wrpcap
@@ -1296,7 +1296,7 @@ class App:
     except Exception as e:messagebox.showerror("PCAP export failed",str(e))
 
  def export(self):
-    path=filedialog.asksaveasfilename(title="Export packet records",defaultextension=".json",filetypes=[("JSON","*.json")],initialfile="netsentinel-packets.json")
+    path=filedialog.asksaveasfilename(title="Export packet records",defaultextension=".json",filetypes=[("JSON","*.json")],initialfile="CocoScanner-packets.json")
     if path:
      try:save(Path(path),self.packets);messagebox.showinfo("Export complete",f"Exported {len(self.packets)} records.")
      except Exception as e:messagebox.showerror("Export failed",str(e))

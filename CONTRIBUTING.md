@@ -1,4 +1,4 @@
-# Contributing to NETSENTINEL
+# Contributing to COCOSCANNER
 
 Thanks for your interest in contributing.
 

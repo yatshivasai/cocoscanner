@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="./netsentinel-logo.png" alt="NETSENTINEL Logo" width="200">
+  <img src="./cocoscanner-logo.png" alt="CocoScanner Logo" width="200">
 
-  <h1>NETSENTINEL</h1>
+  <h1>CocoScanner</h1>
 
   <p><strong>Network Monitoring &amp; Security Investigation</strong></p>
   <p>Monitor · Analyze · Investigate · Document</p>
@@ -19,7 +19,7 @@ A Python-based desktop application for Network traffic analysis, threat intellig
 
 ## Overview
 
-NETSENTINEL is a native desktop application designed to bring essential network monitoring and investigation capabilities into one workspace.
+CocoScanner is a native desktop application designed to bring essential network monitoring and investigation capabilities into one workspace.
 
 Built with Python, Tkinter, Scapy, Nmap, and JSON-based local storage, it provides a practical environment for cybersecurity learning, network analysis, and investigation workflows.
 
@@ -45,8 +45,8 @@ Built with Python, Tkinter, Scapy, Nmap, and JSON-based local storage, it provid
 Clone the repository:
 
 ```bash
-git clone https://github.com/yatshivasai/NetseNtiNel.git
-cd NetseNtiNel
+git clone https://github.com/yatshivasai/CocoScanner.git
+cd CocoScanner
 ```
 
 Install dependencies and launch:
@@ -59,7 +59,7 @@ chmod +x setup.sh run.sh
 
 ## Quick Start
 
-1. Launch NETSENTINEL.
+1. Launch CocoScanner.
 2. Select a network interface you are authorized to monitor.
 3. Start packet capture or load a saved PCAP file.
 4. Inspect packets, DNS activity, TCP flows, and available alerts.
@@ -87,7 +87,7 @@ Automated tests do not replace end-to-end testing with real network interfaces a
 - Heuristic alerts and threat indicator matches require analyst verification.
 - Imported Suricata and Zeek logs are analyzed offline; their services are not automatically deployed.
 - Evidence hashes help verify file integrity but do not independently establish provenance.
-- NETSENTINEL is an actively developed project and is not a certified enterprise SIEM.
+- CocoScanner is an actively developed project and is not a certified enterprise SIEM.
 
 ## Documentation
 
@@ -98,12 +98,12 @@ Automated tests do not replace end-to-end testing with real network interfaces a
 
 ## License
 
-NETSENTINEL is released under the MIT License. See [`LICENSE`](LICENSE).
+CocoScanner is released under the MIT License. See [`LICENSE`](LICENSE).
 
 ---
 
 <div align="center">
 
-**NETSENTINEL — Monitor. Analyze. Investigate.**
+**CocoScanner — Monitor. Analyze. Investigate.**
 
 </div>

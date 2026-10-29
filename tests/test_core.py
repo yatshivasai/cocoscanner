@@ -1,10 +1,10 @@
-"""Lightweight regression tests for NETSENTINEL core validation/filter logic."""
+"""Lightweight regression tests for CocoScanner core validation/filter logic."""
 import importlib.util
 import unittest
 from pathlib import Path
 
-APP_PATH = Path(__file__).resolve().parents[1] / "netsentinel.py"
-spec = importlib.util.spec_from_file_location("netsentinel", APP_PATH)
+APP_PATH = Path(__file__).resolve().parents[1] / "cocoscanner.py"
+spec = importlib.util.spec_from_file_location("CocoScanner", APP_PATH)
 ns = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(ns)
 
