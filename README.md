@@ -3,9 +3,10 @@
 ![NETSENTINEL Logo](netsentinel-logo-compact.png#gh-light-mode-only){width="30"}
 # NETSENTINEL
 
+
 ### Network Monitoring & Security Investigation
 
-A Python-based desktop application for network traffic analysis, threat intelligence correlation, and cybersecurity investigations on Ubuntu Linux.
+A Python-based desktop application for Network traffic analysis, threat intelligence correlation, and cybersecurity investigations on Ubuntu Linux.
 
 **Monitor · Analyze · Investigate · Document**
 
