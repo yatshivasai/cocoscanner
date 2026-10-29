@@ -1,6 +1,6 @@
 <div align="center">
-
-<img src="assets/netsentinel-logo.png" alt="NETSENTINEL Logo" width="300">
+  <img src="assets/Gemini_Generated_Image_kl7g6dkl7g6dkl7g.png" alt="NETSENTINEL Logo" width="420">
+</div>
 
 # NETSENTINEL
 
