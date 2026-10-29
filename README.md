@@ -1,6 +1,6 @@
-<div align="center">
-  <img src="netsentinel-logo-compact.png" alt="NETSENTINEL Logo" width="70">
-</div>
+# NETSENTINEL
+
+![NETSENTINEL Logo](netsentinel-logo-compact.png#gh-light-mode-only){width="70"}
 # NETSENTINEL
 
 ### Network Monitoring & Security Investigation
