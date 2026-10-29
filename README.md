@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./netsentinel-logo.png" alt="NETSENTINEL Logo" width="90">
+  <img src="./netsentinel-logo.png" alt="NETSENTINEL Logo" width="100">
 
   <h1>NETSENTINEL</h1>
 
