@@ -1,9 +1,8 @@
 <div align="center">
-  <img src="netsentinel-logo-compact.png" alt="NETSENTINEL" width="180">
+  <img src="netsentinel-logo-compact.png" alt="NETSENTINEL" width="90">
 
   <h2>NETSENTINEL</h2>
   <p>Network Monitoring &amp; Security Investigation</p>
-  <p><strong>Monitor · Analyze · Investigate · Document</strong></p>
 </div>
 # NETSENTINEL
 
